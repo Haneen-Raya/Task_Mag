@@ -10,14 +10,21 @@ use Illuminate\Auth\Access\Response;
 class StatusPolicy
 {
     use HandlesAuthorization;
-
+    /**
+     * 
+     * @param \App\Models\User $user
+     * @param mixed $ability
+     * @return bool
+     */
     public function before(User $user, $ability)
     {
         return $user->isAdmin();
     }
 
     /**
-     * Determine whether the user can view any models.
+     *
+     * @param \App\Models\User $user
+     * @return bool
      */
     public function viewAny(User $user): bool
     {
@@ -25,7 +32,10 @@ class StatusPolicy
     }
 
     /**
-     * Determine whether the user can view the model.
+     *
+     * @param \App\Models\User $user
+     * @param \App\Models\Status $status
+     * @return bool
      */
     public function view(User $user, Status $status): bool
     {
@@ -33,7 +43,9 @@ class StatusPolicy
     }
 
     /**
-     * Determine whether the user can create models.
+     *
+     * @param \App\Models\User $user
+     * @return bool
      */
     public function create(User $user): bool
     {
@@ -41,7 +53,10 @@ class StatusPolicy
     }
 
     /**
-     * Determine whether the user can update the model.
+     *
+     * @param \App\Models\User $user
+     * @param \App\Models\Status $status
+     * @return bool
      */
     public function update(User $user, Status $status): bool
     {
@@ -49,7 +64,10 @@ class StatusPolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
+     *
+     * @param \App\Models\User $user
+     * @param \App\Models\Status $status
+     * @return bool
      */
     public function delete(User $user, Status $status): bool
     {
@@ -57,7 +75,10 @@ class StatusPolicy
     }
 
     /**
-     * Determine whether the user can restore the model.
+     *
+     * @param \App\Models\User $user
+     * @param \App\Models\Status $status
+     * @return bool
      */
     public function restore(User $user, Status $status): bool
     {
@@ -65,7 +86,10 @@ class StatusPolicy
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     *
+     * @param \App\Models\User $user
+     * @param \App\Models\Status $status
+     * @return bool
      */
     public function forceDelete(User $user, Status $status): bool
     {

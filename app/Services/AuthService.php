@@ -7,11 +7,23 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthService
 {
+    /**
+     *
+     * @param array $data
+     * @return User
+     */
     public function register(array $data): User
     {
         $data['password'] = Hash::make($data['password']);
         return User::create($data);
     }
+    /**
+     * 
+     * @param string $email
+     * @param string $password
+     * @throws \Exception
+     * @return User
+     */
     public function login(string $email, string $password): User
     {
         $user = User::where('email', $email)->firstOrFail();

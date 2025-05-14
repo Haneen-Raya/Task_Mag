@@ -15,11 +15,18 @@ class StatusController extends Controller
 {
 
     protected StatusService $status;
-
+    /**
+     *
+     * @param \App\Services\StatusService $status
+     */
     public function __construct(StatusService $status)
     {
         $this->status = $status;
     }
+    /**
+     *
+     * @return string[]
+     */
     public static function middleware(): array
     {
         return [
@@ -27,16 +34,19 @@ class StatusController extends Controller
         ];
     }
     /**
-     * Display a listing of the resource.
+     *
+     * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function index()
     {
         Gate::authorize('viewAny', Status::class);
         return response()->json($this->status->list());
     }
-
     /**
-     * Display the specified resource.
+     *
+     *
+     * @param \App\Models\Status $status
+     * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function show(Status $status)
     {
@@ -45,7 +55,9 @@ class StatusController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     *
+     * @param \App\Http\Requests\Status\StoreStatusRequest $request
+     * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function store(StoreStatusRequest $request)
     {
@@ -55,7 +67,10 @@ class StatusController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     *
+     * @param \App\Http\Requests\Status\UpdateStatusRequest $request
+     * @param \App\Models\Status $status
+     * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function update(UpdateStatusRequest $request, Status $status)
     {
@@ -66,7 +81,9 @@ class StatusController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 
+     * @param \App\Models\Status $status
+     * @return mixed|\Illuminate\Http\JsonResponse
      */
     public function destroy(Status $status)
     {

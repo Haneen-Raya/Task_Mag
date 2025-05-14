@@ -10,8 +10,14 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class TaskService 
+class TaskService
 {
+    /**
+     *
+     * @param \App\Models\User $user
+     * @param array $filters
+     * @return LengthAwarePaginator
+     */
     public function list(User $user, array $filters = [])
     {
         $query = Task::with('status');
@@ -26,7 +32,12 @@ class TaskService
         }
         return $query->paginate(3);
     }
-
+    /**
+     *
+     * @param \App\Models\User $user
+     * @param array $data
+     * @return Task
+     */
     public function create(User $user, array $data): Task
     {
         $User = $user->isAdmin() && isset($data['user_id'])
@@ -37,7 +48,12 @@ class TaskService
 
         return Task::create($data);
     }
-
+    /**
+     *
+     * @param \App\Models\Task $task
+     * @param array $data
+     * @return Task
+     */
     public function update(Task $task, array $data): Task
     {
 
@@ -48,7 +64,11 @@ class TaskService
         $task->update($data);
         return $task;
     }
-
+    /**
+     * 
+     * @param \App\Models\Task $task
+     * @return void
+     */
     public function delete(Task $task): void
     {
         $task->delete();
